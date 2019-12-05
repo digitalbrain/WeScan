@@ -9,15 +9,15 @@
 import UIKit
 
 /// A UIView used by corners of a quadrilateral that is aware of its position.
-final class EditScanCornerView: UIView {
+open class EditScanCornerView: UIView {
     
     let position: CornerPosition
     
     /// The image to display when the corner view is highlighted.
-    private var image: UIImage?
-    private(set) var isHighlighted = false
+    public var image: UIImage?
+    public var isHighlighted = false
     
-    lazy private var circleLayer: CAShapeLayer = {
+    lazy public var circleLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
         layer.fillColor = UIColor.clear.cgColor
         layer.strokeColor = UIColor.white.cgColor
@@ -33,16 +33,16 @@ final class EditScanCornerView: UIView {
         layer.addSublayer(circleLayer)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         layer.cornerRadius = bounds.width / 2.0
     }
     
-    override func draw(_ rect: CGRect) {
+    override open func draw(_ rect: CGRect) {
         super.draw(rect)
         
         let bezierPath = UIBezierPath(ovalIn: rect.insetBy(dx: circleLayer.lineWidth, dy: circleLayer.lineWidth))
@@ -52,13 +52,13 @@ final class EditScanCornerView: UIView {
         image?.draw(in: rect)
     }
     
-    func highlightWithImage(_ image: UIImage) {
+    open func highlightWithImage(_ image: UIImage) {
         isHighlighted = true
         self.image = image
         self.setNeedsDisplay()
     }
     
-    func reset() {
+    open func reset() {
         isHighlighted = false
         image = nil
         setNeedsDisplay()
