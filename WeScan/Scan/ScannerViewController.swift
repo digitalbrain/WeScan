@@ -19,7 +19,7 @@ open class ScannerViewController: UIViewController {
     open var focusRectangle: FocusRectangleView!
     
     /// The view that draws the detected rectangles.
-    open let quadView = QuadrilateralView()
+    public let quadView = QuadrilateralView()
         
     /// Whether flash is enabled
     open var flashEnabled = false
