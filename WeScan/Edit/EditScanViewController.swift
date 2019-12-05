@@ -10,9 +10,9 @@ import UIKit
 import AVFoundation
 
 /// The `EditScanViewController` offers an interface for the user to edit the detected quadrilateral.
-final class EditScanViewController: UIViewController {
+open class EditScanViewController: UIViewController {
     
-    lazy private var imageView: UIImageView = {
+    lazy open var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
         imageView.isOpaque = true
@@ -23,7 +23,7 @@ final class EditScanViewController: UIViewController {
         return imageView
     }()
     
-    lazy private var quadView: QuadrilateralView = {
+    lazy open var quadView: QuadrilateralView = {
         let quadView = QuadrilateralView()
         quadView.editable = true
         quadView.translatesAutoresizingMaskIntoConstraints = false
@@ -57,17 +57,17 @@ final class EditScanViewController: UIViewController {
     
     // MARK: - Life Cycle
     
-    init(image: UIImage, quad: Quadrilateral?, rotateImage: Bool = true) {
+    public init(image: UIImage, quad: Quadrilateral?, rotateImage: Bool = true) {
         self.image = rotateImage ? image.applyingPortraitOrientation() : image
         self.quad = quad ?? EditScanViewController.defaultQuad(forImage: image)
         super.init(nibName: nil, bundle: nil)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         
         setupViews()
@@ -87,13 +87,13 @@ final class EditScanViewController: UIViewController {
         view.addGestureRecognizer(touchDown)
     }
     
-    override func viewDidLayoutSubviews() {
+    override open func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         adjustQuadViewConstraints()
         displayQuad()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override open func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         // Work around for an iOS 11.2 bug where UIBarButtonItems don't get back to their normal state after being pressed.
@@ -103,12 +103,12 @@ final class EditScanViewController: UIViewController {
     
     // MARK: - Setups
     
-    private func setupViews() {
+    open func setupViews() {
         view.addSubview(imageView)
         view.addSubview(quadView)
     }
     
-    private func setupConstraints() {
+    open func setupConstraints() {
         let imageViewConstraints = [
             imageView.topAnchor.constraint(equalTo: view.topAnchor),
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
